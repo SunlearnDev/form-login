@@ -1,11 +1,6 @@
 <?php
 // http://localhost/learnPhp/form-dangky/login.php
     session_start();
-    if(isset($_POST['bnt_sub'])){
-      $email = $_POST['email'];
-      $password = $_POST['password'];
-      header('location: index.php');
-    }
 ?>
 <head>
     <meta charset="UTF-8">
@@ -21,7 +16,36 @@
           <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
         </div>
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form class="space-y-6" action="#" method="POST">
+          <form class="space-y-6" action='login.php' method="POST">
+            <?php
+             if(isset($_POST['submit'])){
+              $inputemail = trim($_POST['email']);
+              $inputpassword = trim($_POST['password']);
+                $fould = false;
+                foreach($_SESSION['user'] as $email => $password){
+                  if($inputemail === $email && $inputpassword === $password){
+                      $fould = true;
+                      break;
+                  }
+                }
+              if($fould){?>
+                  <script>
+                    // Sử dụng hàm setTimeout để chuyển trang sau 3 giây
+                    setTimeout(function() {
+                    window.location.href = "login.php"; 
+                    }, 1500); 
+                  </script>
+               <?php header('location: index.php');
+                exit();
+                 }else{?>
+                <div class="block transition duration-700 ease-in-out">         
+                <label  class="flex  text-sm font-medium leading-6 w-full rounded-md border-0 p-1.5 text-rose-500 bg-rose-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-rose-500 mr-1 ">
+                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                  </svg>Email does not exist or password is incorrect</label>
+                </div>
+                <?php  }
+            }
+            ?>
             <div>
               <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
               <div class="mt-2">
@@ -42,7 +66,7 @@
             </div>
       
             <div>
-              <button type="submit" name ="bnt_sub" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+              <button type="submit" name ="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
             </div>
           </form>
       

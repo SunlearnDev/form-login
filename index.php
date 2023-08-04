@@ -43,17 +43,19 @@
               <!-- Profile dropdown -->
               <?php 
               if(isset($_SESSION['login'])){?>
+              <a href='login.php'>
                 <div class="relative ml-3">
                 <div>
-                  <a href='login.php'>
+                  
                     <button type="button" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                       <span class="absolute -inset-1.5"></span>
                       <span class=" w-20 opacity-0 hover:opacity-100 h-auto absolute text-white z-10 ">Log In</span>
                       <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                     </button>
-                  </a>
+                  
                 </div>
                 </div>
+                </a>
               <?php 
               } else {?>
               <div class="relative ml-3">
